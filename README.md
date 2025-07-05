@@ -37,9 +37,13 @@ python3 main.py
 
 ### Perfromance Results:
 ==== PERFORMANCE SUMMARY ====
+
 FP32 mean latency      : 1372.57 ms
+
 MTSQ PyTorch latency   : 1431.30 ms
+
 ONNX (TensorRT) latency: 992.47 ms
+
 ONNX accuracy pass rate: 100.00% | max error 0.000000
 
 ~27% Faster inference on CPU.
