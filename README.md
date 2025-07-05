@@ -43,3 +43,5 @@ ONNX (TensorRT) latency: 992.47 ms
 ONNX accuracy pass rate: 100.00% | max error 0.000000
 
 ~27% Faster inference on CPU.
+
+## 2SQAT will be updated soon
