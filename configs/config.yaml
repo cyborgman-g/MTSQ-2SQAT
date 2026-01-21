@@ -1,0 +1,92 @@
+# MTSQ & 2SQAT Configuration
+
+# Environment
+environment:
+  conda_env: "poc"
+  device: "cuda"
+  seed: 42
+
+# Data paths - actual paths from user's setup
+data:
+  # Training data
+  voxceleb2_train: "/mnt/drive3/Datasets/DATASET_VOXCELEB/2/train"
+  
+  # Test audio directories (trials search across these)
+  audio_paths:
+    - "/mnt/drive3/Datasets/DATASET_VOXCELEB/1/test"
+    - "/mnt/drive3/Datasets/DATASET_VOXCELEB/2/test"
+    - "/mnt/drive3/Datasets/DATASET_VOXCELEB/1/train"
+  
+  # Augmentation data
+  musan_path: "/mnt/drive2/Datasets/DATASET_MUSAN/musan"
+  rirs_path: "/mnt/drive2/Datasets/DATASET_RIRS_NOISES/RIRS_NOISES"
+  
+  # Trial files (CSV format)
+  trials:
+    vox_o: "/mnt/drive3/Datasets/DATASET_VOXCELEB/trial_pairs/voxceleb_O_cleaned.csv"
+    vox_e: "/mnt/drive3/Datasets/DATASET_VOXCELEB/trial_pairs/voxceleb_E_cleaned.csv"
+    vox_h: "/mnt/drive3/Datasets/DATASET_VOXCELEB/trial_pairs/voxceleb_H_cleaned.csv"
+
+# Audio settings
+audio:
+  sample_rate: 16000
+  duration: 3.0  # seconds (user's default)
+  n_mels: 80
+  n_fft: 512
+  win_length: 400   # 25ms at 16kHz
+  hop_length: 160   # 10ms at 16kHz
+
+# Model settings
+model:
+  name: "ecapa_tdnn_512"  # Options: ecapa_tdnn_512, ecapa_tdnn_1024, resnet34, rawnet3, titanet_large
+  embedding_dim: 192
+  pretrained_dir: "./pretrained_models"
+
+# MTSQ settings
+mtsq:
+  bits: 8
+  num_iters: 300
+  lr: 0.01
+  kl_weight: 1.0
+  temperature: 1.0
+  per_channel: true
+  symmetric: true
+  fuse_bn: true
+
+# 2SQAT settings
+two_sqat:
+  bits: 8
+  total_epochs: 10
+  stage1_epochs: 5  # FP8 stage
+  batch_size: 64
+  lr: 0.001
+  weight_decay: 0.0001
+  
+  # Number of speakers to use (null = all)
+  num_classes: null
+  
+  # Optimizer
+  optimizer:
+    name: "adam"
+    betas: [0.9, 0.999]
+  
+  # Scheduler
+  scheduler:
+    name: "cosine"
+    min_lr: 0.00001
+
+# ONNX export settings
+onnx:
+  opset_version: 14
+  dynamic_batch: true
+
+# Evaluation settings
+eval:
+  batch_size: 1
+  num_workers: 4
+
+# Output paths
+output:
+  checkpoint_dir: "./outputs/checkpoints"
+  onnx_dir: "./outputs/onnx"
+  logs_dir: "./outputs/logs"

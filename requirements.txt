@@ -1,0 +1,21 @@
+# Core
+torch>=2.0.0
+torchaudio>=2.0.0
+
+# Pretrained models
+speechbrain>=0.5.14
+wespeaker>=0.1.0
+nemo_toolkit[asr]>=1.20.0
+
+# ONNX
+onnx>=1.14.0
+onnxruntime-gpu>=1.15.0
+
+# Evaluation
+scipy>=1.10.0
+scikit-learn>=1.2.0
+
+# Utilities
+tqdm>=4.65.0
+pyyaml>=6.0
+numpy>=1.24.0
